@@ -1,0 +1,38 @@
+{
+  "name": "lockscroll",
+  "title": "jQuery LockScroll",
+  "description": "Lock the scroll of a element and freeze in the actual position.",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "lock",
+    "scroll",
+    "lockscroll"
+  ],
+  "version": "1.0.0",
+  "author": {
+    "name": "Eduardo Pittol",
+    "email": "edpittol@gmail.com",
+    "url": "https://github.com/edpittol"
+  },
+  "maintainers": [
+    {
+      "name": "Eduardo Pittol",
+      "email": "edpittol@gmail.com",
+      "url": "https://github.com/edpittol"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "bugs": "https://github.com/edpittol/jquery-lockscroll/issues",
+  "homepage": "https://github.com/edpittol/jquery-lockscroll",
+  "docs": "https://github.com/edpittol/jquery-blockscroll#readme",
+  "download": "https://github.com/edpittol/jquery-lockscroll/archive/master.zip",
+  "dependencies": {
+    "jquery": ">=1.4"
+  }
+}

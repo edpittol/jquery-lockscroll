@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery LockScroll</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script src="../src/jquery.lockscroll.js"></script>
+
+		<style type="text/css">
+		button {
+			margin-bottom: 20px;
+		}
+		#outer {
+			height: 1200px;
+		}
+
+		#element {
+			width: 400px;
+			height: 200px;
+			overflow: auto;
+		}
+		</style>
+	</head>
+	<body>
+		<button id="lock">Lock Scroll</button>
+		<button id="unlock">Unlock Scroll</button>
+		<button id="scroll">Scroll</button>
+		<div id="outer">
+			<div id="element">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nobis, magni numquam dolorem a pariatur optio aspernatur vel natus suscipit minima quod dolores accusantium doloremque adipisci veritatis enim! Quidem, nam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus dicta reiciendis magnam consequuntur quidem non fugit laboriosam illo? Ullam consequuntur commodi iusto iure cum porro facere voluptate veritatis aperiam vero. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae reprehenderit at est blanditiis earum necessitatibus. Assumenda id dignissimos accusantium eius sed labore voluptatum odio veritatis. Veritatis laboriosam perspiciatis quisquam ab.</div>
+		</div>
+		<script>
+			$(function() {
+				$("#lock").click(function() {
+					$("#element").lockScroll(true).scrollTop(100);
+				});
+
+				$("#unlock").click(function() {
+					$("#element").lockScroll(false);
+				});
+
+				$("#scroll").click(function() {
+					$("#element").scrollTop($("#element").scrollTop() + 20);
+				});
+			});
+		</script>
+	</body>
+</html>

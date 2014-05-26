@@ -1,0 +1,20 @@
+{
+	"name": "jquery-lockscroll",
+	"version": "1.0.0",
+	"homepage": "http://github.com/aztecweb/jquery-lockscroll",
+	"authors": [
+		"Eduardo Pittol <edpittol@gmail.com>"
+	],
+	"description": "Lock the scroll of a element and freeze in the actual position.",
+	"main": "src/jquery.lockscroll.js",
+	"keywords": [
+		"jquery",
+		"plugin",
+		"lock"
+		"scroll",
+		"lockscroll",
+		"jquery-plugin",
+		"jquery-lockscroll"
+	],
+	"license": "MIT"
+}
