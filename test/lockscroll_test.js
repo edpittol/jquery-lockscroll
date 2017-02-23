@@ -1,58 +1,130 @@
-(function($) {
-
-  module('jQuery#lockScroll', {
-    setup: function() {
-      this.elems = $('#qunit-fixture').children();
-      this.elem = $('#qunit-fixture div:eq(0)').css({
-          "width" : 100,
-          "height" : 100,
-          "overflow" : "auto"
-        });
+/* globals $, QUnit */
+$( function() {
+  QUnit.module( 'jQuery#lockScroll', {
+    /**
+     * Set fixtures element and configure the window to test the plugin without
+     * association with an element
+     */
+    beforeEach: function() {
+      this.elems = $( '#qunit-fixture' ).children();
+      this.elem = $( '#qunit-fixture div:eq(0)' ).css( {
+        'width' : 100,
+        'height' : 100,
+        'overflow' : 'auto'
+      } );
       this.text = this.elem.text();
+
+      $( window, this.elem ).scrollTop( 0 );
+      $( document.body ).height( 9999 );
+    },
+
+    /**
+     * Set window default state after the tests
+     */
+    afterEach: function() {
+      $( document.body ).height( 'auto' );
     }
   });
 
-  test('is chainable', function() {
-    expect(1);
-    strictEqual(this.elems.lockScroll(), this.elems, 'should be chainable');
+  /**
+   * Test chain jQuery feature
+   *
+   * @param {string} The test name.
+   * @param {Assert} QUnit assert object.
+   */
+  QUnit.test( 'is chainable', function( assert ) {
+    assert.expect( 1 );
+    assert.strictEqual( this.elems.lockScroll(), this.elems, 'should be chainable' );
   });
 
-  test('is awesome', function() {
-    expect(1);
-    strictEqual(this.elems.lockScroll().text(), this.text + this.text + this.text, 'should be awesome');
+  /**
+   * Test chain jQuery elements return
+   *
+   * @param {string} The test name.
+   * @param {Assert} QUnit assert object.
+   */
+  QUnit.test( 'is awesome', function( assert ) {
+    assert.expect( 1 );
+    assert.strictEqual( this.elems.lockScroll().text(), this.text + this.text + this.text, 'should be awesome' );
   });
 
-  asyncTest('is locked', function() {
-    expect(1);
-
-    // the plugin call scrollTop function first, the test is executed in the second pass
-    var firstpass = true;
+  /**
+   * Test the plugin is locking the scroll
+   *
+   * @param {string} The test name.
+   * @param {Assert} QUnit assert object.
+   */
+  QUnit.test( 'is locked', function( assert ) {
+    var done = assert.async();
+    assert.expect( 1 );
 
     this.elem
-      .on("scroll", function() {
-        if(firstpass) {
-          firstpass = false;
-        } else {
-          strictEqual($(this).scrollTop(), 0, 'should be locked');
-          start();
-        }
-      })
-      .lockScroll(true)
-      .scrollTop(100);
+      .lockScroll( true )
+      .one( 'scroll.test', function() {
+        assert.strictEqual( $( this ).scrollTop(), 0, 'should be locked' );
+        done();
+      } )
+      .scrollTop( 100 );
   });
 
-  asyncTest('is unlocked', function() {
-    expect(1);
+  /**
+   * Test the plugin is unlocking the scroll
+   *
+   * @param {string} The test name.
+   * @param {Assert} QUnit assert object.
+   */
+  QUnit.test( 'is unlocked', function( assert ) {
+    var done = assert.async();
+    assert.expect( 1 );
 
     this.elem
-      .on("scroll", function() {
-        strictEqual($(this).scrollTop(), 100, 'should be unlocked');
-        start();
+      .lockScroll( true )
+      .lockScroll( false )
+      .one( 'scroll', function() {
+        assert.strictEqual( $( this ).scrollTop(), 100, 'should be unlocked' );
+        done();
       })
-      // the call lockScroll(false) is always called after a lockScroll(true) call
-      .lockScroll(true)
-      .lockScroll(false)
-      .scrollTop(100);
+      .scrollTop( 100 );
   });
 
-}(jQuery));
+  /**
+   * Test the plugin is locking the window when is not associate an element
+   *
+   * @param {string} The test name.
+   * @param {Assert} QUnit assert object.
+   */
+  QUnit.test( 'window is locked', function( assert ) {
+    var done = assert.async();
+    assert.expect( 1 );
+
+    $.lockScroll( true );
+
+    $(window)
+      .one( 'scroll.test', function() {
+        assert.strictEqual( $( this ).scrollTop(), 0, 'should be locked' );
+        done();
+      })
+      .scrollTop( 100 );
+  });
+
+  /**
+   * Test the plugin is unlocking the window when is not associate an element
+   *
+   * @param {string} The test name.
+   * @param {Assert} QUnit assert object.
+   */
+  QUnit.test( 'window is unlocked', function( assert ) {
+    var done = assert.async();
+    assert.expect( 1 );
+
+    $.lockScroll( true );
+    $.lockScroll( false );
+
+    $(window)
+      .one( 'scroll', function() {
+        assert.strictEqual( $( this ).scrollTop(), 100, 'should be unlocked' );
+        done();
+      } )
+      .scrollTop( 100 );
+  } );
+} );

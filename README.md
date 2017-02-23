@@ -6,23 +6,15 @@ This plugin lock and unlock the scroll of a specific element.
 
 ## Usage
 
-1. Include jQuery:
-
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-
-2. Include plugin's code:
-
-	<script src="dist/jquery.lockscroll.min.js"></script>
-
-3. Call the plugin to:
-
-#### Lock
+### Lock
 
 	$("#element").lockScroll(true);
 
-#### Unlock
+### Unlock
 
 	$("#element").lockScroll(false);
+
+### Window shortcut
 
 Use $.lockScroll to lock/unlock the window scroll.
 
