@@ -1,9 +1,12 @@
-/*! jQuery LockScroll - v1.0.0 - 2014-05-26
+/*! jQuery LockScroll - v1.0.0 - 2017-02-23
 * https://github.com/edpittol/jquery-lockscroll
-* Copyright (c) 2014 Eduardo Pittol; Licensed MIT */
+* Copyright (c) 2017 Eduardo Pittol; Licensed MIT */
 ;(function ( $, window, document, undefined ) {
-	
 	$.fn.lockScroll = function(lock) {
+		if('undefined' === typeof lock) {
+			lock = true;
+		}
+
 		this.each(function() {
 			var $element = $(this),
 				scrollEvent = "scroll.lockScroll",
@@ -19,6 +22,10 @@
 		});
 
 		return this;
+	};
+
+	$.lockScroll = function(lock) {
+		$(window).lockScroll(lock);
 	};
 
 })( jQuery, window, document );

@@ -7,8 +7,11 @@
  *  Under MIT License
  */
 ;(function ( $, window, document, undefined ) {
-	
 	$.fn.lockScroll = function(lock) {
+		if('undefined' === typeof lock) {
+			lock = true;
+		}
+
 		this.each(function() {
 			var $element = $(this),
 				scrollEvent = "scroll.lockScroll",
@@ -24,6 +27,10 @@
 		});
 
 		return this;
+	};
+
+	$.lockScroll = function(lock) {
+		$(window).lockScroll(lock);
 	};
 
 })( jQuery, window, document );
